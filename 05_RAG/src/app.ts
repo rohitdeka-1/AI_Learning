@@ -1,11 +1,11 @@
 import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf"
 import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters"
 import { OpenAIEmbeddings } from "@langchain/openai";
-import  { QdrantVectorStore } from "@langchain/qdrant"
+import { QdrantVectorStore } from "@langchain/qdrant"
 import 'dotenv/config'
 import { retrieve } from "./retrieval.js";
 
-export const sytem = async() => {
+export const sytem = async () => {
 
     const file = "C:/Users/alkar/Downloads/Print _ Udyam Registration Certificate.pdf";
     const loader = new PDFLoader(file);
@@ -14,8 +14,8 @@ export const sytem = async() => {
 
     //split
     const splitter = new RecursiveCharacterTextSplitter({
-        chunkOverlap:10,
-        chunkSize:50
+        chunkOverlap: 10,
+        chunkSize: 50
     });
     //semantic chunking
 
@@ -33,12 +33,12 @@ export const sytem = async() => {
         chunk,
         embeddingModel,
         {
-            url:"http://localhost:6333",
-            collectionName:"my_documents",
+            url: "http://localhost:6333",
+            collectionName: "my_documents",
         }
     )
 
-   
+
 
     await retrieve();
 

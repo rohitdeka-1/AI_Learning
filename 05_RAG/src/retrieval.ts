@@ -48,6 +48,7 @@ export const retrieve = async () => {
     })
     
     logger.info(result);
-    logger.info(completions);
+    logger.info("THE ANSWER TO YOUR QUERY IS :")
+    logger.info(completions.choices[0].message.content);
 
 }
