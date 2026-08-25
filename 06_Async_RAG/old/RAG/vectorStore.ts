@@ -9,7 +9,6 @@ export const initializeVectorStore = async (
 ): Promise<QdrantVectorStore> => {
     try {
         console.log(`Inserting ${documents.length} chunks into Qdrant...`);
-
         const store = await QdrantVectorStore.fromDocuments(
             documents,
             embeddingsModel,
@@ -18,7 +17,6 @@ export const initializeVectorStore = async (
                 collectionName: config.collectionName,
             }
         );
-
         console.log("Successfully inserted data into Qdrant!");
         return store;
     } catch (error) {

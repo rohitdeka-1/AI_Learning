@@ -1,18 +1,14 @@
-import { buildApp } from "./index.js";
+import { buildApp } from "./app.js"
 
-
-const start = async (): Promise<void> => {
+const start = async () => {
     const app = await buildApp();
-
     try {
-        app.listen({ port: 3000 }, () => {
-            app.log.info("Server is running on port 3000")
+        app.listen(({ port: 3000 }), async () => {
+            app.log.info(`server started`)
         })
     } catch (err) {
-        app.log.error("Error: " + err)
+        app.log.error(err);
     }
 }
 
 start();
-
-

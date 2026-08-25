@@ -27,19 +27,16 @@ export const ragPipeline = async () => {
 export const askQuestion = async (query: string) => {
     try {
         console.log(`Starting RAG Query Pipeline for: "${query}"`);
-        
+
         // 1. Retrieve relevant context
         const context = await retriever(query);
-        
+
         // 2. Generate answer
         const answer = await generator(query, context);
-        
+
         return answer;
     } catch (error) {
         console.error("Error asking question:", error);
         throw error;
     }
 };
-
-// Also export them individually in case you want to use them separately
-export { retriever, generator };

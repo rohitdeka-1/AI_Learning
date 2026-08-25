@@ -7,8 +7,8 @@ export const ingestion = async () => {
     const doc = await loader.load();
 
     const splitter = new RecursiveCharacterTextSplitter({
-        chunkOverlap: 50,
-        chunkSize: 100
+        chunkOverlap: 400,
+        chunkSize: 1000
     });
 
     const chunk = await splitter.splitDocuments(doc);
