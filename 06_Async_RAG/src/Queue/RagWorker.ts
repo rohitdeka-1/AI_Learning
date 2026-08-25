@@ -23,6 +23,6 @@ worker.on('completed', (job, returnvalue) => {
     console.log(`the returned answer : ${returnvalue} `)
 })
 
-worker.on('failed', (job) => {
-    console.log(`Job ${job?.id} has failed`);
+worker.on('failed', (job, err) => {
+    console.error(`Job ${job?.id} has failed with error:`, err.message);
 })

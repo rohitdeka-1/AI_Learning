@@ -16,7 +16,7 @@ export class LlmService {
         const SYSTEM_PROMPT = "YOU ARE A HELPFUL AI ASSISTANT WHO ANSWERS USER QUERY BASED ON THE AVAILABLE CONTEXT FROM PDF, DONT ANSWER ANYTHING ELSE";
 
         const completions = await this.openai.chat.completions.create({
-            model: "gemini-1.5-flash",
+            model: "gemini-3.6-flash",
             messages: [
                 { role: "system", content: SYSTEM_PROMPT },
                 { role: "user", content: `context: ${context} query: ${query} ` }
