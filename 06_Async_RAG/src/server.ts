@@ -12,7 +12,7 @@ const start = async () => {
 
         const filePath = "C:/Users/alkar/Downloads/Print _ Udyam Registration Certificate.pdf";
 
-        const queryArr = ["what is this pdf about?", "what is the rg number"];
+        const queryArr = ["what is this pdf about?", "what is the rg number", "who is rohit"];
 
 
         await ragService.setupDb(filePath);
