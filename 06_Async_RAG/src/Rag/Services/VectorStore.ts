@@ -1,15 +1,15 @@
-import { OpenAIEmbeddings } from "@langchain/openai";
+import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
 import { QdrantVectorStore } from "@langchain/qdrant";
 import { config } from "../../Config/config.js";
-import { Document } from "langchain";
+import { Document } from "@langchain/core/documents";
 
 export class VectorStore {
-    private embeddingModel: OpenAIEmbeddings;
+    private embeddingModel: GoogleGenerativeAIEmbeddings;
 
     constructor() {
-        this.embeddingModel = new OpenAIEmbeddings({
-            model: "text-embedding-3-large",
-            apiKey: config.openaiApiKey,
+        this.embeddingModel = new GoogleGenerativeAIEmbeddings({
+            apiKey: config.geminiApiKey,
+            model: "gemini-embedding-001",
         });
     }
 
@@ -20,7 +20,7 @@ export class VectorStore {
             this.embeddingModel,
             {
                 url: config.qdrantUrl,
-                collectionName: "oops"
+                collectionName: "gemini-db"
             }
         )
 
@@ -41,7 +41,7 @@ export class VectorStore {
         await QdrantVectorStore.fromDocuments(doc, this.embeddingModel,
             {
                 url: config.qdrantUrl,
-                collectionName: "oops"
+                collectionName: "gemini-db"
             }
 
         )
