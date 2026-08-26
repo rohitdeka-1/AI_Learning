@@ -1,8 +1,10 @@
 import { type FastifyInstance } from "fastify";
-import { RagQueue } from "../../Queue/RagQueue.js";
 import { RagController } from "../Controller/ragController.js";
 
+interface RouteOpts {
+    controller: RagController;
+}
 
-export const ragRoutes = async (app: FastifyInstance, controller: RagController) => {
-    app.post('/ask', (req, reply) => controller.askQuestion(req, reply));
+export const ragRoutes = async (app: FastifyInstance, opts: RouteOpts) => {
+    app.post('/ask', (req, reply) => opts.controller.askQuestion(req, reply));
 }

@@ -24,7 +24,8 @@
     "ioredis": "^6.0.0",
     "langchain": "^1.5.10",
     "openai": "^7.5.0",
-    "pdf-parse": "^2.4.5"
+    "pdf-parse": "^2.4.5",
+    "socket.io": "^4.8.3"
   },
   "devDependencies": {
     "@types/node": "^26.3.0",
