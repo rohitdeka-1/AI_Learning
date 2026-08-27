@@ -2,7 +2,7 @@ import { Server } from "socket.io";
 import { Redis } from "ioredis";
 import http from "http";
 import type { RagQueue } from "../Queue/RagQueue.js";
-import { json } from "stream/consumers";
+
 
 
 export class SocketService {
