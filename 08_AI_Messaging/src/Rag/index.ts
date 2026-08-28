@@ -9,7 +9,7 @@ import { LlmService } from "./Services/LLmService.js";
 import { RagService } from "./Services/RagServices.js";
 import { RagController } from "./Controller/RagController.js";
 import { ragRoutes } from "./Routes/index.js";
-import { RagWorkerManager, RagWorkerManager } from "./Jobs/RagWorker.js";
+import { RagWorkerManager } from "./Jobs/RagWorker.js";
 
 // --- 1. Module-Specific Setup ---
 const geminiClient = new openAI({
