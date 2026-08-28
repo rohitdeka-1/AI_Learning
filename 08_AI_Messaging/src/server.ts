@@ -10,9 +10,9 @@ const start = async () => {
     });
 
     try {
+        initializeSockets(app.server);
         await app.listen({ port: 5001 });
 
-        initializeSockets(app.server);
 
         console.log("Server started");
     } catch (err) {

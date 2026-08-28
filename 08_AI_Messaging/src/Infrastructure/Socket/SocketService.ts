@@ -2,17 +2,22 @@ import { Server } from "socket.io";
 import http from "http"
 import { RagQueue } from "../../Rag/Jobs/RagQueue.js";
 import { Redis } from "ioredis";
+import { z } from "zod"
+
+const questionSchema = z.object({
+    question: z.string().min(1).max(50)
+})
 
 export class SocketService {
-    private io: Server
-    private queue: RagQueue
-    private subscriber: Redis
+    private io: Server;
+    private queue: RagQueue;
+    private subscriber: Redis;
     constructor(httpServer: http.Server, queue: RagQueue, subscriber: Redis) {
         this.io = new Server(httpServer, {
             cors: { origin: "*" }
         });
         this.queue = queue;
-        this.subscriber = subscriber
+        this.subscriber = subscriber;
     }
 
     public async startSocket() {
@@ -31,7 +36,8 @@ export class SocketService {
 
             socket.on("chatwithAi", async (data: any) => {
                 let parsedData = typeof data == "string" ? JSON.parse(data) : data;
-                console.log(parsedData);
+                const validDAta = questionSchema.parse(parsedData);
+                console.log(validDAta);
                 await this.queue.addJob("chat", { ...parsedData, socketId: socket.id });
             })
 
