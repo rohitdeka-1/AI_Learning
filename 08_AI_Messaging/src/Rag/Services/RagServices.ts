@@ -2,6 +2,7 @@ import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf";
 import type { RagRepository } from "../Repository/RagRepository.js";
 import { type LlmService } from "./LLmService.js";
 import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
+
 export class RagService {
     private ragRepository: RagRepository
     private llmService: LlmService
@@ -33,7 +34,7 @@ export class RagService {
 
         const splitter = await chunk.splitDocuments(doc);
 
-        this.ragRepository.saveToQdrant(splitter);
+        await this.ragRepository.saveToQdrant(splitter);
 
     }
 
