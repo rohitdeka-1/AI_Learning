@@ -11,20 +11,11 @@ export class RagController {
     public ask = async (req: FastifyRequest, reply: FastifyReply) => {
         try {
             const body = req.body as { question: string };
-            const filePath = req.body as { path: string };
             const question = body.question;
-
             if (!question) {
                 return reply.status(400).send({
                     success: "false",
                     error: "Question is required"
-                })
-            }
-
-            if (!filePath) {
-                return reply.status(400).send({
-                    success: "false",
-                    error: "File path needed"
                 })
             }
             const answer = await this.ragService.askQuestion(question);
@@ -34,7 +25,31 @@ export class RagController {
             })
         } catch (err) {
             console.log("error : ", err);
+            return reply.status(500).send({ error: "Internal server error" });
         }
     }
 
+    public ingest = async (req: FastifyRequest, reply: FastifyReply) => {
+        try {
+            const body = req.body as { filePath: string };
+            const filePath = body.filePath;
+
+            if (!filePath) {
+                return reply.status(400).send({
+                    success: "false",
+                    error: "filePath is required"
+                })
+            }
+
+            await this.ragService.chunker(filePath);
+
+            return reply.status(200).send({
+                success: "true",
+                message: "PDF successfully chunked and saved to Qdrant!"
+            })
+        } catch (err) {
+            console.log("error : ", err);
+            return reply.status(500).send({ error: "Internal server error" });
+        }
+    }
 }
