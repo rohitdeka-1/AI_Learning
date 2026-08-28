@@ -1,8 +1,6 @@
 import openAI from "openai";
 import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
 import { QdrantVectorStore } from "@langchain/qdrant";
-// Note: Assuming you're using this based on the Qdrant langchain package. 
-// If you don't have `@qdrant/js-client-rest` installed, you might need to adjust this.
 import { QdrantClient } from "@qdrant/js-client-rest";
 import { RagRepository } from "./Repository/RagRepository.js";
 import { LlmService } from "./Services/LLmService.js";
@@ -24,7 +22,7 @@ const qdrantBaseClient = new QdrantClient({
 
 const embeddingsClient = new GoogleGenerativeAIEmbeddings({
     apiKey: process.env.GEMINI_API_KEY!,
-    modelName: "embedding-001"!,
+    modelName: "gemini-embedding-2",
 });
 
 const qdrantVectorStore = new QdrantVectorStore(embeddingsClient, {

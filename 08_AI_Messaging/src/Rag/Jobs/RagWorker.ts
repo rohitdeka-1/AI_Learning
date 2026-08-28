@@ -18,12 +18,16 @@ export class RagWorkerManager {
     public startWorker() {
 
         const worker = new Worker("rag-queue", async (job: Job) => {
-            if (job.name == "chat") {
-                const { receiverId, msg } = job.data;
+            try {
+                if (job.name == "chat") {
+                    const { socketId, question } = job.data;
 
-                const answer = await this.ragService.askQuestion(msg);
-                this.publisher.publish(`msgfor:${receiverId}`, JSON.stringify(answer));
-
+                    const answer = await this.ragService.askQuestion(question);
+                    console.log(answer);
+                    this.publisher.publish(`chat-message:${socketId}`, JSON.stringify(answer));
+                }
+            } catch (err) {
+                console.log(err);
             }
         }, {
             connection: {

@@ -1,6 +1,7 @@
 import "dotenv/config";
 import { buildApp } from "./app.js";
 import { ragModule } from "./Rag/index.js";
+import { initializeSockets } from "./Infrastructure/Socket/index.js";
 
 const app = buildApp();
 const start = async () => {
@@ -9,8 +10,11 @@ const start = async () => {
     });
 
     try {
-        await app.listen({ port: 3000 });
-        console.log("Server listening on port 3000");
+        await app.listen({ port: 5001 });
+
+        initializeSockets(app.server);
+
+        console.log("Server started");
     } catch (err) {
         console.log(err);
         process.exit(1);

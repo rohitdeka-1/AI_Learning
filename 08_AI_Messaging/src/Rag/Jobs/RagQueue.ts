@@ -6,7 +6,7 @@ export class RagQueue {
         this.ragQueue = new Queue('rag-queue', {
             connection: {
                 host: 'localhost',
-                port: '6173',
+                port: '6379',
             }
         });
     }

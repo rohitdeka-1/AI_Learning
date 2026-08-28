@@ -31,6 +31,7 @@ export class SocketService {
 
             socket.on("chatwithAi", async (data: any) => {
                 let parsedData = typeof data == "string" ? JSON.parse(data) : data;
+                console.log(parsedData);
                 await this.queue.addJob("chat", { ...parsedData, socketId: socket.id });
             })
 
