@@ -3,8 +3,6 @@ import { Redis } from "ioredis";
 import http from "http";
 import type { RagQueue } from "../Queue/RagQueue.js";
 
-
-
 export class SocketService {
     private io: Server;
     private subscriber: Redis;
@@ -30,7 +28,6 @@ export class SocketService {
             this.io.to(socketId as string).emit("answer", { data })
 
         })
-
 
         this.io.on("connection", async (socket) => {
 

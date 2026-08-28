@@ -6,7 +6,7 @@ export class RagQueue {
         this.myQueue = new Queue('rag-queue', {
             connection: {
                 host: 'localhost',
-                port: 6379,
+                port: '6379',
             }
         });
     }
@@ -14,5 +14,4 @@ export class RagQueue {
     async addJob(name: string, data: any) {
         return await this.myQueue.add(name, data);
     }
-
 }

@@ -6,7 +6,6 @@ import "./Worker/WorkerService.js";
 const app = buildApp();
 const start = async () => {
     try {
-
         const queue = new RagQueue();
         const socketService = new SocketService(app.server, queue);
         socketService.startSocketServer();
@@ -19,3 +18,7 @@ const start = async () => {
 
 start();
 
+// make a worker
+// make a bull mq queue
+
+// make a socket server with http server and queue attached to it
